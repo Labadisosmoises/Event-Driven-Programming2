@@ -23,17 +23,17 @@ function save($data)
     $attributes = implode(", ", array_keys($data));
     $values = implode(", ", array_values($data));
     $app_id = $_POST['inp_appid'];
-    $validate = "SELECT COUNT(*) AS i FROM t_students WHERE s_app_id LIKE '$app_id'";
+     $validate = "SELECT COUNT(*) AS i FROM t_students WHERE s_app_id LIKE '$app_id'";
 
-    $rs = $conn->query($validate);
-    $count = $rs->fetch_assoc();
-
-    if($count['i'] == 0){
-        $query = "INSERT INTO t_students ($attributes) VALUES ($values) ";
+     $rs = $conn->query($validate);
+     $count = $rs->fetch_assoc();
+    
+     if($count['i'] == 0) {
+        $query = "INSERT INTO t_students ($attributes) VALUES ($values)";
         $conn->query($query);
-        header('location: ../registration.php?success');
+      header('location: ../registration.php?success');
     }else{
-        header('location: ../registration.php?invalid');
+       header('location: ../registration.php?invalid');
     }
 
     $conn->close();
